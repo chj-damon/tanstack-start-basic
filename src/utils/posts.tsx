@@ -32,12 +32,12 @@ export const fetchPosts = createServerFn()
   .middleware([logMiddleware])
   .handler(async () => {
   console.info('Fetching posts...')
-  const res = await fetch('https://jsonplaceholder.typicode.com/posts')
-  if (!res.ok) {
-    throw new Error('Failed to fetch posts')
+  try {
+      const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+      const posts = (await res.json()) as Array<PostType>;
+
+      return posts.slice(0, 10);
+  } catch (error) {
+    throw new Error("Failed to fetch posts");
   }
-
-  const posts = (await res.json()) as Array<PostType>
-
-  return posts.slice(0, 10)
 })

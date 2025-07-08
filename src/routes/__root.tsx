@@ -2,8 +2,8 @@
 import {
   HeadContent,
   Link,
+  Outlet,
   Scripts,
-  createRootRoute,
   createRootRouteWithContext,
 } from '@tanstack/react-router'
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -12,8 +12,10 @@ import * as React from 'react'
 import { DefaultCatchBoundary } from '@/components/DefaultCatchBoundary'
 import { NotFound } from '@/components/NotFound'
 import appCss from '@/styles/app.css?url'
+import { MantineProvider } from '@mantine/core'
 import { seo } from '@/utils/seo'
 import type { QueryClient } from '@tanstack/react-query';
+import '@mantine/core/styles.css';
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
@@ -64,8 +66,24 @@ export const Route = createRootRouteWithContext<{
   }),
   errorComponent: DefaultCatchBoundary,
   notFoundComponent: () => <NotFound />,
-  shellComponent: RootDocument,
+  shellComponent: RootComponent,
 })
+
+function RootComponent() {
+  return (
+    <RootDocument>
+      <Outlet />
+    </RootDocument>
+  )
+}
+
+const Providers = ({children}: React.PropsWithChildren) => {
+  return (
+    <MantineProvider>
+      {children}
+    </MantineProvider>
+  )
+}
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
@@ -74,60 +92,62 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <div className="p-2 flex gap-2 text-lg">
-          <Link
-            to="/"
-            activeProps={{
-              className: "font-bold",
-            }}
-            activeOptions={{ exact: true }}
-          >
-            Home
-          </Link>{" "}
-          <Link
-            to="/posts"
-            activeProps={{
-              className: "font-bold",
-            }}
-          >
-            Posts
-          </Link>{" "}
-          <Link
-            to="/users"
-            activeProps={{
-              className: "font-bold",
-            }}
-          >
-            Users
-          </Link>{" "}
-          <Link
-            to="/route-a"
-            activeProps={{
-              className: "font-bold",
-            }}
-          >
-            Pathless Layout
-          </Link>{" "}
-          <Link
-            to="/deferred"
-            activeProps={{
-              className: "font-bold",
-            }}
-          >
-            Deferred
-          </Link>{" "}
-          <Link
-            // @ts-expect-error
-            to="/this-route-does-not-exist"
-            activeProps={{
-              className: "font-bold",
-            }}
-          >
-            This Route Does Not Exist
-          </Link>
-        </div>
-        <hr />
-        {children}
+        <Providers>
+          <div className="p-2 flex gap-2 text-lg">
+            <Link
+              to="/"
+              activeProps={{
+                className: "font-bold",
+              }}
+              activeOptions={{ exact: true }}
+            >
+              Home
+            </Link>{" "}
+            <Link
+              to="/posts"
+              activeProps={{
+                className: "font-bold",
+              }}
+            >
+              Posts
+            </Link>{" "}
+            <Link
+              to="/users"
+              activeProps={{
+                className: "font-bold",
+              }}
+            >
+              Users
+            </Link>{" "}
+            <Link
+              to="/route-a"
+              activeProps={{
+                className: "font-bold",
+              }}
+            >
+              Pathless Layout
+            </Link>{" "}
+            <Link
+              to="/deferred"
+              activeProps={{
+                className: "font-bold",
+              }}
+            >
+              Deferred
+            </Link>{" "}
+            <Link
+              // @ts-expect-error
+              to="/this-route-does-not-exist"
+              activeProps={{
+                className: "font-bold",
+              }}
+            >
+              This Route Does Not Exist
+            </Link>
+          </div>
+          <hr />
+          {children}
+        </Providers>
         <TanStackRouterDevtools position="bottom-right" />
         <ReactQueryDevtools buttonPosition="bottom-left" />
         <Scripts />
