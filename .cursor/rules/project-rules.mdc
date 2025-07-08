@@ -1,0 +1,40 @@
+---
+description: 
+globs: *.tsx,*.ts
+alwaysApply: false
+---
+## 项目结构
+- `src/` -- 源代码目录
+- `src/components` -- 所有的公共组件存放目录
+- `src/styles` -- 基础的样式文件存放目录
+- `src/utils` -- 所有的辅助函数的存放目录
+- `src/routes` -- 所有的路由页面的存放目录
+- `common.ts` -- 所有公共的常量定义在这里 
+
+
+
+## 框架
+
+- 使用 React + Tanstack Start 作为项目技术栈
+- 使用函数组件
+- 实现完整的 props 类型
+- 遵循 react 最佳实践
+- 考虑性能优化，对一些复杂的功能需求，可以尝试各种优化手段
+
+## 样式
+
+- 使用 mantine 组件库
+- 使用 tailwindcss
+- 遵循 tailwindcss 的最佳实践
+
+## 状态管理
+
+- 使用 zustand 作为项目的状态管理工具
+- 尽量自己完善 zustand 的type补全
+
+## 代码风格
+
+- 所有新代码全部使用 typescript
+- 遵循《代码整洁之道》的最佳实践
+- 优先使用 async / await， 而不是回调
+- 编写完善的错误处理

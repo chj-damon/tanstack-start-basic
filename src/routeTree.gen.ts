@@ -11,6 +11,7 @@
 import { createServerRootRoute } from '@tanstack/react-start/server'
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ZustandDemoRouteImport } from './routes/zustand-demo'
 import { Route as RedirectRouteImport } from './routes/redirect'
 import { Route as DeferredRouteImport } from './routes/deferred'
 import { Route as PathlessLayoutRouteRouteImport } from './routes/_pathlessLayout/route'
@@ -31,6 +32,11 @@ import { ServerRoute as ApiUsersUserIdServerRouteImport } from './routes/api/use
 
 const rootServerRouteImport = createServerRootRoute()
 
+const ZustandDemoRoute = ZustandDemoRouteImport.update({
+  id: '/zustand-demo',
+  path: '/zustand-demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RedirectRoute = RedirectRouteImport.update({
   id: '/redirect',
   path: '/redirect',
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/deferred': typeof DeferredRoute
   '/redirect': typeof RedirectRoute
+  '/zustand-demo': typeof ZustandDemoRoute
   '/posts': typeof postsPostsRouteRouteWithChildren
   '/users': typeof userUsersRouteRouteWithChildren
   '/posts/$postId': typeof postsPostsPostIdRoute
@@ -136,6 +143,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/deferred': typeof DeferredRoute
   '/redirect': typeof RedirectRoute
+  '/zustand-demo': typeof ZustandDemoRoute
   '/posts/$postId': typeof postsPostsPostIdRoute
   '/users/$userId': typeof userUsersUserIdRoute
   '/route-a': typeof PathlessLayoutNestedLayoutRouteARoute
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/_pathlessLayout': typeof PathlessLayoutRouteRouteWithChildren
   '/deferred': typeof DeferredRoute
   '/redirect': typeof RedirectRoute
+  '/zustand-demo': typeof ZustandDemoRoute
   '/(posts)/posts': typeof postsPostsRouteRouteWithChildren
   '/(user)/users': typeof userUsersRouteRouteWithChildren
   '/_pathlessLayout/_nested-layout': typeof PathlessLayoutNestedLayoutRouteRouteWithChildren
@@ -167,6 +176,7 @@ export interface FileRouteTypes {
     | '/'
     | '/deferred'
     | '/redirect'
+    | '/zustand-demo'
     | '/posts'
     | '/users'
     | '/posts/$postId'
@@ -181,6 +191,7 @@ export interface FileRouteTypes {
     | '/'
     | '/deferred'
     | '/redirect'
+    | '/zustand-demo'
     | '/posts/$postId'
     | '/users/$userId'
     | '/route-a'
@@ -194,6 +205,7 @@ export interface FileRouteTypes {
     | '/_pathlessLayout'
     | '/deferred'
     | '/redirect'
+    | '/zustand-demo'
     | '/(posts)/posts'
     | '/(user)/users'
     | '/_pathlessLayout/_nested-layout'
@@ -211,6 +223,7 @@ export interface RootRouteChildren {
   PathlessLayoutRouteRoute: typeof PathlessLayoutRouteRouteWithChildren
   DeferredRoute: typeof DeferredRoute
   RedirectRoute: typeof RedirectRoute
+  ZustandDemoRoute: typeof ZustandDemoRoute
   postsPostsRouteRoute: typeof postsPostsRouteRouteWithChildren
   userUsersRouteRoute: typeof userUsersRouteRouteWithChildren
   postsPostsPostIdDeepRoute: typeof postsPostsPostIdDeepRoute
@@ -246,6 +259,13 @@ export interface RootServerRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/zustand-demo': {
+      id: '/zustand-demo'
+      path: '/zustand-demo'
+      fullPath: '/zustand-demo'
+      preLoaderRoute: typeof ZustandDemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/redirect': {
       id: '/redirect'
       path: '/redirect'
@@ -447,6 +467,7 @@ const rootRouteChildren: RootRouteChildren = {
   PathlessLayoutRouteRoute: PathlessLayoutRouteRouteWithChildren,
   DeferredRoute: DeferredRoute,
   RedirectRoute: RedirectRoute,
+  ZustandDemoRoute: ZustandDemoRoute,
   postsPostsRouteRoute: postsPostsRouteRouteWithChildren,
   userUsersRouteRoute: userUsersRouteRouteWithChildren,
   postsPostsPostIdDeepRoute: postsPostsPostIdDeepRoute,
