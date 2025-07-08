@@ -1,6 +1,6 @@
 import { notFound } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
-import { logMiddleware } from './loggingMiddleware'
+import { logMiddleware } from '@/middlewares/loggingMiddleware'
 
 export type PostType = {
   id: string
