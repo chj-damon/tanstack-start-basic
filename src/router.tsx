@@ -14,10 +14,10 @@ export function createRouter() {
     defaultErrorComponent: DefaultCatchBoundary,
     defaultNotFoundComponent: () => <NotFound />,
     scrollRestoration: true,
-    context: { queryClient }
+    context: { queryClient },
   })
 
-  return routerWithQueryClient(router, queryClient);
+  return routerWithQueryClient(router, queryClient)
 }
 
 declare module '@tanstack/react-router' {

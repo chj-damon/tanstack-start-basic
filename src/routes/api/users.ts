@@ -6,30 +6,26 @@ import type { User } from '@/utils/users'
 /**
  * middleware主要是给Server Function或者 ServerFileRoute 使用的
  */
-const userLoggerMiddleware = createMiddleware({ type: 'request' }).server(
-  async ({ next, request }) => {
-    console.info('In: /users')
-    console.info('Request Headers:', getRequestHeaders())
-    const result = await next()
-    result.response.headers.set('x-users', 'true')
-    console.info('Out: /users')
-    return result
-  },
-)
+const userLoggerMiddleware = createMiddleware({ type: 'request' }).server(async ({ next }) => {
+  console.info('In: /users')
+  console.info('Request Headers:', getRequestHeaders())
+  const result = await next()
+  result.response.headers.set('x-users', 'true')
+  console.info('Out: /users')
+  return result
+})
 
-const testParentMiddleware = createMiddleware({ type: 'request' }).server(
-  async ({ next, request }) => {
-    console.info('In: testParentMiddleware')
-    const result = await next()
-    result.response.headers.set('x-test-parent', 'true')
-    console.info('Out: testParentMiddleware')
-    return result
-  },
-)
+const testParentMiddleware = createMiddleware({ type: 'request' }).server(async ({ next }) => {
+  console.info('In: testParentMiddleware')
+  const result = await next()
+  result.response.headers.set('x-test-parent', 'true')
+  console.info('Out: testParentMiddleware')
+  return result
+})
 
 const testMiddleware = createMiddleware({ type: 'request' })
   .middleware([testParentMiddleware])
-  .server(async ({ next, request }) => {
+  .server(async ({ next }) => {
     console.info('In: testMiddleware')
     const result = await next()
     result.response.headers.set('x-test', 'true')
@@ -52,9 +48,9 @@ export const ServerRoute = createServerFileRoute('/api/users')
       console.info('GET /api/users @', request.url)
       console.info('Fetching users... @', request.url)
       try {
-        const res = await fetch('https://jsonplaceholder.typicode.com/users');
-        const data = await res.json() as Array<User>;
-        console.info('data', data);
+        const res = await fetch('https://jsonplaceholder.typicode.com/users')
+        const data = (await res.json()) as Array<User>
+        console.info('data', data)
 
         const list = data.slice(0, 10)
 

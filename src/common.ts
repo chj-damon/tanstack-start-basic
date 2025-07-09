@@ -1,4 +1,4 @@
-import { seo } from "./utils/seo";
+import { seo } from './utils/seo'
 
 export const meta = [
   {
@@ -9,18 +9,17 @@ export const meta = [
     content: 'width=device-width, initial-scale=1',
   },
   ...seo({
-    title:
-      'TanStack Start | Type-Safe, Client-First, Full-Stack React Framework',
+    title: 'TanStack Start | Type-Safe, Client-First, Full-Stack React Framework',
     description: `TanStack Start is a type-safe, client-first, full-stack React framework. `,
   }),
-];
+]
 
 export const scripts = [
   {
     src: '/customScript.js',
     type: 'text/javascript',
   },
-];
+]
 
 export const links = [
   {
@@ -42,4 +41,4 @@ export const links = [
   },
   { rel: 'manifest', href: '/site.webmanifest', color: '#fffff' },
   { rel: 'icon', href: '/favicon.ico' },
-];
+]

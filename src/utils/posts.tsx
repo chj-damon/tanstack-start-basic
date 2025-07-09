@@ -12,9 +12,7 @@ export const fetchPost = createServerFn()
   .validator((d: string) => d)
   .handler(async ({ data }) => {
     console.info(`Fetching post with id ${data}...`)
-    const res = await fetch(
-      `https://jsonplaceholder.typicode.com/posts/${data}`,
-    )
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${data}`)
     if (!res.ok) {
       if (res.status === 404) {
         throw notFound()
@@ -31,13 +29,13 @@ export const fetchPost = createServerFn()
 export const fetchPosts = createServerFn()
   .middleware([logMiddleware])
   .handler(async () => {
-  console.info('Fetching posts...')
-  try {
-      const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-      const posts = (await res.json()) as Array<PostType>;
+    console.info('Fetching posts...')
+    try {
+      const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+      const posts = (await res.json()) as Array<PostType>
 
-      return posts.slice(0, 10);
-  } catch (error) {
-    throw new Error("Failed to fetch posts");
-  }
-})
+      return posts.slice(0, 10)
+    } catch (error) {
+      throw new Error('Failed to fetch posts')
+    }
+  })

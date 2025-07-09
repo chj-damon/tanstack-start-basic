@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from '@tanstack/react-router'
 
 export function Header() {
   return (
@@ -6,54 +6,55 @@ export function Header() {
       <Link
         to="/"
         activeProps={{
-          className: "font-bold",
+          className: 'font-bold',
         }}
         activeOptions={{ exact: true }}
       >
         Home
-      </Link>{" "}
+      </Link>{' '}
       <Link
         to="/posts"
         activeProps={{
-          className: "font-bold",
+          className: 'font-bold',
         }}
       >
         Posts
-      </Link>{" "}
+      </Link>{' '}
       <Link
         to="/users"
         activeProps={{
-          className: "font-bold",
+          className: 'font-bold',
         }}
       >
         Users
-      </Link>{" "}
+      </Link>{' '}
       <Link
         to="/route-a"
         activeProps={{
-          className: "font-bold",
+          className: 'font-bold',
         }}
       >
         Pathless Layout
-      </Link>{" "}
+      </Link>{' '}
       <Link
         to="/deferred"
         activeProps={{
-          className: "font-bold",
+          className: 'font-bold',
         }}
       >
         Deferred
-      </Link>{" "}
+      </Link>{' '}
       <Link
         // @ts-expect-error
         to="/this-route-does-not-exist"
         activeProps={{
-          className: "font-bold",
+          className: 'font-bold',
         }}
       >
         This Route Does Not Exist
       </Link>
       <Link to="/zustand-demo">zustand demo</Link>
+      <Link to="/zustand-rerender-demo">zustand rerender demo</Link>
     </div>
-  );
+  )
 }

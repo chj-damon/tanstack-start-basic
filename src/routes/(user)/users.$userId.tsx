@@ -32,9 +32,9 @@ export const Route = createFileRoute('/(user)/users/$userId')({
 function UserComponent() {
   // const user = Route.useLoaderData()
 
-  const params = Route.useParams();
-  const user = useSuspenseQuery(userQueryOptions(params.userId));
-  const userData = user.data;
+  const params = Route.useParams()
+  const user = useSuspenseQuery(userQueryOptions(params.userId))
+  const userData = user.data
 
   return (
     <div className="space-y-2">

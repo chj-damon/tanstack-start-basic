@@ -11,6 +11,7 @@
 import { createServerRootRoute } from '@tanstack/react-start/server'
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ZustandRerenderDemoRouteImport } from './routes/zustand-rerender-demo'
 import { Route as ZustandDemoRouteImport } from './routes/zustand-demo'
 import { Route as RedirectRouteImport } from './routes/redirect'
 import { Route as DeferredRouteImport } from './routes/deferred'
@@ -32,6 +33,11 @@ import { ServerRoute as ApiUsersUserIdServerRouteImport } from './routes/api/use
 
 const rootServerRouteImport = createServerRootRoute()
 
+const ZustandRerenderDemoRoute = ZustandRerenderDemoRouteImport.update({
+  id: '/zustand-rerender-demo',
+  path: '/zustand-rerender-demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ZustandDemoRoute = ZustandDemoRouteImport.update({
   id: '/zustand-demo',
   path: '/zustand-demo',
@@ -129,6 +135,7 @@ export interface FileRoutesByFullPath {
   '/deferred': typeof DeferredRoute
   '/redirect': typeof RedirectRoute
   '/zustand-demo': typeof ZustandDemoRoute
+  '/zustand-rerender-demo': typeof ZustandRerenderDemoRoute
   '/posts': typeof postsPostsRouteRouteWithChildren
   '/users': typeof userUsersRouteRouteWithChildren
   '/posts/$postId': typeof postsPostsPostIdRoute
@@ -144,6 +151,7 @@ export interface FileRoutesByTo {
   '/deferred': typeof DeferredRoute
   '/redirect': typeof RedirectRoute
   '/zustand-demo': typeof ZustandDemoRoute
+  '/zustand-rerender-demo': typeof ZustandRerenderDemoRoute
   '/posts/$postId': typeof postsPostsPostIdRoute
   '/users/$userId': typeof userUsersUserIdRoute
   '/route-a': typeof PathlessLayoutNestedLayoutRouteARoute
@@ -159,6 +167,7 @@ export interface FileRoutesById {
   '/deferred': typeof DeferredRoute
   '/redirect': typeof RedirectRoute
   '/zustand-demo': typeof ZustandDemoRoute
+  '/zustand-rerender-demo': typeof ZustandRerenderDemoRoute
   '/(posts)/posts': typeof postsPostsRouteRouteWithChildren
   '/(user)/users': typeof userUsersRouteRouteWithChildren
   '/_pathlessLayout/_nested-layout': typeof PathlessLayoutNestedLayoutRouteRouteWithChildren
@@ -177,6 +186,7 @@ export interface FileRouteTypes {
     | '/deferred'
     | '/redirect'
     | '/zustand-demo'
+    | '/zustand-rerender-demo'
     | '/posts'
     | '/users'
     | '/posts/$postId'
@@ -192,6 +202,7 @@ export interface FileRouteTypes {
     | '/deferred'
     | '/redirect'
     | '/zustand-demo'
+    | '/zustand-rerender-demo'
     | '/posts/$postId'
     | '/users/$userId'
     | '/route-a'
@@ -206,6 +217,7 @@ export interface FileRouteTypes {
     | '/deferred'
     | '/redirect'
     | '/zustand-demo'
+    | '/zustand-rerender-demo'
     | '/(posts)/posts'
     | '/(user)/users'
     | '/_pathlessLayout/_nested-layout'
@@ -224,6 +236,7 @@ export interface RootRouteChildren {
   DeferredRoute: typeof DeferredRoute
   RedirectRoute: typeof RedirectRoute
   ZustandDemoRoute: typeof ZustandDemoRoute
+  ZustandRerenderDemoRoute: typeof ZustandRerenderDemoRoute
   postsPostsRouteRoute: typeof postsPostsRouteRouteWithChildren
   userUsersRouteRoute: typeof userUsersRouteRouteWithChildren
   postsPostsPostIdDeepRoute: typeof postsPostsPostIdDeepRoute
@@ -259,6 +272,13 @@ export interface RootServerRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/zustand-rerender-demo': {
+      id: '/zustand-rerender-demo'
+      path: '/zustand-rerender-demo'
+      fullPath: '/zustand-rerender-demo'
+      preLoaderRoute: typeof ZustandRerenderDemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/zustand-demo': {
       id: '/zustand-demo'
       path: '/zustand-demo'
@@ -468,6 +488,7 @@ const rootRouteChildren: RootRouteChildren = {
   DeferredRoute: DeferredRoute,
   RedirectRoute: RedirectRoute,
   ZustandDemoRoute: ZustandDemoRoute,
+  ZustandRerenderDemoRoute: ZustandRerenderDemoRoute,
   postsPostsRouteRoute: postsPostsRouteRouteWithChildren,
   userUsersRouteRoute: userUsersRouteRouteWithChildren,
   postsPostsPostIdDeepRoute: postsPostsPostIdDeepRoute,

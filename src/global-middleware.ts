@@ -1,7 +1,7 @@
-import { registerGlobalMiddleware } from '@tanstack/react-start';
+import { registerGlobalMiddleware } from '@tanstack/react-start'
 
-import { authMiddleware } from './middlewares/authMiddleware';
+import { authMiddleware } from './middlewares/authMiddleware'
 
 registerGlobalMiddleware({
   middleware: [authMiddleware],
-});
+})
